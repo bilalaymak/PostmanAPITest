@@ -1,0 +1,30 @@
+{
+	"info": {
+		"_postman_id": "c56133f8-7701-408c-a27b-81447b915e6c",
+		"name": "AutomationExercise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26356720"
+	},
+	"item": [
+		{
+			"name": " https://automationexercise.com/api/productsList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://automationexercise.com/api/productsList",
+					"protocol": "https",
+					"host": [
+						"automationexercise",
+						"com"
+					],
+					"path": [
+						"api",
+						"productsList"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
