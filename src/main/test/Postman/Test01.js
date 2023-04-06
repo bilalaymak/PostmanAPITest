@@ -16,3 +16,12 @@ describe('MyTestClass', function() {
   });
 
 });
+
+//validation json fields in Response
+pm.test("validation of fields ", ()=>{
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.firstname).to.eql("John");
+    pm.expect(jsonData.lastname).to.eql("Smith");
+    pm.expect(jsonData.totalprice).to.eql(111);
+    pm.expect(jsonData.depositpaid).to.eql(true);
+});
