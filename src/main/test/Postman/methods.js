@@ -85,5 +85,64 @@ pm.test("test array properties", () =>{
 })
 
 
+//status code
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+//get request
+pm.test("Successful Get request", () =>{
+    pm.expect(pm.response.code).to.be.oneOf([200,201]);
+});
+
+//testing headers presence
+pm.test("Content-Type header is present", () => {
+    pm.response.to.have.header("Content-Type");
+});
+
+//content type
+pm.test("Content-Type header is application/json", () => {
+    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');
+});
+
+//content length
+pm.test("Content-Length header is application/json", () => {
+    pm.expect(pm.response.headers.get('Content-length')).to.eql('178');
+});
+
+//time
+pm.test("Response time is less than 200ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(400);
+});
+
+//RESPONSE BODY
+
+const jsonData = pm.response.json();
+pm.test("test data type of the response", () =>{
+    pm.expect(jsonData).to.be.an("object");
+     pm.expect(jsonData.firstname).to.be.a("string");
+    pm.expect(jsonData.lastname).to.be.a("string");
+    pm.expect(jsonData.totalprice).to.be.a("number");
+    pm.expect(jsonData.depositpaid).to.be.an("boolean");
+    pm.expect(jsonData.bookingdates).to.be.a("object");
+});
+
+//array properties
+pm.test("test array properties", () =>{
+    pm.expect(jsonData.courses).to.include("Jane");
+    pm.expect(jsonData.courses).to.have.members("Doe",111,true);
+})
+
+//cookies
+pm.test("Cookie 'language' is present", () => {
+    pm.expect(pm.cookies.has('currency')).to.be.true;
+});
+
+//cookies
+pm.test("Cookie 'language' has values", () => {
+    pm.expect(pm.cookies.get('language')).to.eql('en-gb');
+});
+
+
 
 

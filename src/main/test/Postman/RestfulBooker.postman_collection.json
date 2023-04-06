@@ -37,7 +37,7 @@
 			"response": []
 		},
 		{
-			"name": "restful-booker.herokuapp.com/booking/32",
+			"name": "test methods in javaScript",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -351,6 +351,86 @@
 					"path": [
 						"booking",
 						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://restful-booker.herokuapp.com/booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n                 \"firstname\": \"Bilal\",\r\n                 \"lastname\": \"Aymak\",\r\n                 \"totalprice\": 9999,\r\n                 \"depositpaid\": true,\r\n                 \"bookingdates\": {\r\n                     \"checkin\": \"2023-09-21\",\r\n                     \"checkout\": \"2023-12-21\"\r\n                  },\r\n                  \"additionalneeds\": \"Lunch\"\r\n              }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://restful-booker.herokuapp.com/booking/91",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking/91",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking",
+						"91"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://restful-booker.herokuapp.com/booking/91",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstname\": \"Eymen\",\r\n    \"lastname\": \"Aymak\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://restful-booker.herokuapp.com/booking/91",
+					"protocol": "https",
+					"host": [
+						"restful-booker",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"booking",
+						"91"
 					]
 				}
 			},
