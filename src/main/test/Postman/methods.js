@@ -143,6 +143,44 @@ pm.test("Cookie 'language' has values", () => {
     pm.expect(pm.cookies.get('language')).to.eql('en-gb');
 });
 
+const cookieJar = pm.cookies.jar();
+
+// create a cookie
+cookieJar.set(URL, "cookie name", "cookie value", callback(error, cookie));
+
+// create a PostmanCookie
+cookieJar.set(URL, { name: "cookie name", value: "cookie value", httpOnly: true }, callback (error, cookie));
+
+// get the created cookie
+cookieJar.get(URL, "cookie name", callback(error, cookie));
+
+// Delete the created cookie
+cookieJar.unset(URL , "cookie name", callback (error));
+
+// delete the set cookies
+cookieJar.clear(URL, callback (error));
+
+//Deleting and then setting cookies in sequence
+cookieJar.clear(URL, (error) => {
+    jar.set(URL, "cookie name", "cookie value", callback(error, cookie));
+});
+
+
+//access a variable at any scope including local
+pm.variables.get("variable_key");
+//access a global variable
+pm.globals.get("variable_key");
+//access a collection variable
+pm.collectionVariables.get("variable_key");
+//access an environment variable
+pm.environment.get("variable_key");
+
+
+
+
+
+
+
 
 
 
