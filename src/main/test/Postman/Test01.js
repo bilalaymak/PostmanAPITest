@@ -37,6 +37,7 @@ pm.test("validation of fields ", ()=>{
 });
 
 //json schema validation
+//for schema convertor ==> https://www.liquid-technologies.com/online-json-to-schema-converter
 pm.test('schema is valid', function(){
     var jsonData = pm.response.json();
 var schema = {

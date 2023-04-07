@@ -74,27 +74,25 @@
 							"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
 							"});\r",
 							"\r",
+							"\r",
 							"//time\r",
 							"pm.test(\"Response time is less than 200ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 							"});\r",
 							"\r",
-							"//RESPONSE BODY\r",
 							"\r",
-							"const jsonData = pm.response.json();\r",
-							"pm.test(\"test data type of the response\", () =>{\r",
-							"    pm.expect(jsonData).to.be.an(\"object\");\r",
-							"    pm.expect(jsonData.id).to.be.an(\"number\");\r",
-							"    pm.expect(jsonData.name).to.be.an(\"string\");\r",
-							"    pm.expect(jsonData.describtion).to.be.an(\"object\");\r",
-							"    pm.expect(jsonData.price).to.be.an(\"number\");\r",
+							"\r",
+							"//cookies\r",
+							"pm.test(\"Cookie 'language' is present\", () => {\r",
+							"    pm.expect(pm.cookies.has('currency')).to.be.true;\r",
 							"});\r",
 							"\r",
-							"//array properties\r",
-							"pm.test(\"test array properties\", () =>{\r",
-							"    pm.expect(jsonData.courses).to.include(\"Java\");\r",
-							"    pm.expect(jsonData.courses).to.have.members(\"Java\",\"Selenium\",\"API\");\r",
-							"})\r",
+							"//cookies\r",
+							"pm.test(\"Cookie 'language' has values\", () => {\r",
+							"    pm.expect(pm.cookies.get('language')).to.eql('en-gb');\r",
+							"});\r",
+							"\r",
+							"\r",
 							"\r",
 							"\r",
 							"\r",
@@ -126,17 +124,25 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer"
+				},
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
 				"url": {
-					"raw": "http://localhost:3000/items",
-					"protocol": "http",
+					"raw": "{{localBaseUrl}}/data",
 					"host": [
-						"localhost"
+						"{{localBaseUrl}}"
 					],
-					"port": "3000",
 					"path": [
-						"items"
+						"data"
 					]
 				}
 			},
@@ -201,19 +207,36 @@
 		},
 		{
 			"name": "http://localhost:3000/items/7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"firstname\": \"Veli\",\r\n        \"lastname\": \"Aydin\",\r\n        \"totalprice\": 111,\r\n        \"depositpaid\": true\r\n      \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:3000/items/7",
+					"raw": "http://localhost:3000/data?firstname=Bilal",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"items",
-						"7"
+						"data"
+					],
+					"query": [
+						{
+							"key": "firstname",
+							"value": "Bilal"
+						}
 					]
 				}
 			},
@@ -330,6 +353,174 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:3000/aim",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/aim",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"aim"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/information",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/information",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"information"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/data/7",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/data/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/data/11",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/data/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n        \"id\": 11,\r\n        \"firstname\": \"Bilal\",\r\n        \"lastname\": \"Aymak\",\r\n        \"education\":[\r\n            \"Java\",\r\n            \"API\",\r\n            \"Selenium\",\r\n            \"Database\"\r\n        \r\n        ]\r\n    }\r\n    ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/data",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRequestWithBaseUrl",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localBaseUrl}}/data/4",
+					"host": [
+						"{{localBaseUrl}}"
+					],
+					"path": [
+						"data",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "localBaseUrl",
+			"value": " http://localhost:3000"
 		}
 	]
 }

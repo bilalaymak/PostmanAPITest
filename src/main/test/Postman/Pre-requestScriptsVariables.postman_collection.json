@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "9440af90-0c20-48a8-83cb-a3902a315df2",
+		"name": "Pre-requestScriptsVariables",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26356720"
+	},
+	"item": [
+		{
+			"name": "New Folder",
+			"item": [
+				{
+					"name": "variables",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"test script at request level\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//PRE-REQUEST SCRIPTS\r",
+									"/*\r",
+									"//pre-requestScripts--->request--->response--->tests\r",
+									"\r",
+									"collection level\r",
+									"folder level\r",
+									"request level\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"*/\r",
+									"console.log(\"prerequest script at request level\");\r",
+									"\r",
+									"/*\r",
+									"VARIBLES\r",
+									"----------------\r",
+									"\r",
+									"\r",
+									"SCOPE of VARIABLES\r",
+									"-------------------\r",
+									"workspace--->collections--->requests\r",
+									"\r",
+									"\r",
+									"global ==> global is the level of workspace and it access its childs(collections-requests),accessible everywhere\r",
+									"{{url_global}}/api/users/13\r",
+									"\r",
+									"collection ==> accessible within collection\r",
+									"{{url_collect}}/api/users/13\r",
+									"\r",
+									"\r",
+									"environment ==> we can access in all collections, but we need to switch to particular environment\r",
+									"when we use environment, we can access its variables in all collections and requests\r",
+									"without swithing to environment, we cannot use its variables\r",
+									"{{url_QA_env}}/api/users/13\r",
+									"\r",
+									"\r",
+									"local\r",
+									"data\r",
+									"\r",
+									"\r",
+									"*/\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_global}}/api/users/13",
+							"host": [
+								"{{url_global}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n            \"id\": 13,\r\n            \"email\": \"bilal.aymak@reqres.in\",\r\n            \"first_name\": \"Bilal\",\r\n            \"last_name\": \"Aymak\",\r\n            \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_global}}/api/users",
+							"host": [
+								"{{url_global}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 123,\r\n    \"email\": \"bilal@reqres.in\",\r\n    \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\",\r\n    \"createdAt\": \"2023-04-07T02:06:47.541Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_QA_env}}/api/users/13",
+							"host": [
+								"{{url_QA_env}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_global}}/api/users/123",
+							"host": [
+								"{{url_global}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_dev_env}}/api/users?page=2",
+							"host": [
+								"{{url_dev_env}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"console.log(\"prerequest script at folder level\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"console.log(\"test script at folder level\");"
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"prerequest script at collection level\");",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"test script at collection level\");"
+				]
+			}
+		}
+	]
+}
