@@ -176,6 +176,13 @@ pm.collectionVariables.get("variable_key");
 pm.environment.get("variable_key");
 
 
+//to create automatic id
+const { v4: uuidv4 } = require('uuid');
+const jsonData = {
+  id: uuidv4(),
+  name: 'John Doe',
+  email: 'johndoe@example.com'
+};
 
 
 
