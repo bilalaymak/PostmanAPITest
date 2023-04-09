@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "034e7831-10f2-464a-b2c3-46adfa50b351",
+		"name": "GoRestAPI-chaining",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26356720"
+	},
+	"item": [
+		{
+			"name": "create user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//authentication token: f3f0c71d46242de6c0108db4b6c6ca88aac30b32334eaca6f9da78c9db88d321\r",
+							"\r",
+							"//creating random string(email)\r",
+							"var random = Math.random().toString(36).substring(2);\r",
+							"var userEmail = \"bilal\" + random + \"@gmail.com\";\r",
+							"var userName = \"bilal\" + random;\r",
+							"\r",
+							"pm.environment.set(\"email_env\",userEmail);\r",
+							"pm.environment.set(\"name_env\",userName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": {{name_env}},\r\n   \"gender\":\"male\",\r\n   \"email\":{{email_env}}, //we should generate email address authomatically and randomly, because it must be unique(like id)\r\n   \"status\":\"active\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{GoRestBase_url}}/users",
+					"host": [
+						"{{GoRestBase_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user details",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{GoRestBase_url}}/users/{{id_goRest}}",
+					"host": [
+						"{{GoRestBase_url}}"
+					],
+					"path": [
+						"users",
+						"{{id_goRest}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"name\": \"bilal\",\r\n   \"email\":\"bilalxyz@gmail.com\",\r\n   \"status\":\"inactive\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{GoRestBase_url}}/users/{{id_goRest}}",
+					"host": [
+						"{{GoRestBase_url}}"
+					],
+					"path": [
+						"users",
+						"{{id_goRest}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{GoRestBase_url}}/users/{{id_goRest}}",
+					"host": [
+						"{{GoRestBase_url}}"
+					],
+					"path": [
+						"users",
+						"{{id_goRest}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token_GoRest}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//GoRest api does not allow post,put,delete,patch request without authentication",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "GoRestBase_url",
+			"value": "https://gorest.co.in/public/v2",
+			"type": "string"
+		},
+		{
+			"key": "id_goRest",
+			"value": "844005",
+			"type": "string"
+		}
+	]
+}

@@ -13,15 +13,6 @@
 					"name": "variables",
 					"event": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"console.log(\"test script at request level\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
 							"listen": "prerequest",
 							"script": {
 								"exec": [
@@ -62,8 +53,21 @@
 									"{{url_QA_env}}/api/users/13\r",
 									"\r",
 									"\r",
-									"local\r",
-									"data\r",
+									"local-->accessible only within request(specific to request)\r",
+									"//we can define variables(local variable) in request level just in the pre-request Script field\r",
+									"//we cab also define global, collection, environment within pre-request Script\r",
+									"\r",
+									"//local variable\r",
+									"pm.variables.set(\"url_local\",\"https://reqres.in/api\");\r",
+									"//{{url_local}}/users?page=1\r",
+									"\r",
+									"//global variable through prerequest script\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"data--> external files csv/text..\r",
+									"\r",
 									"\r",
 									"\r",
 									"*/\r",
@@ -98,20 +102,34 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"test script at request level\");"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url_global}}/api/users/13",
+							"raw": "{{url_global}}/api/users?page=2",
 							"host": [
 								"{{url_global}}"
 							],
 							"path": [
 								"api",
-								"users",
-								"13"
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -158,7 +176,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "QA environment variable",
 					"event": [
 						{
 							"listen": "test",
@@ -199,15 +217,26 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "global variable",
 					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {\r",
 									"    pm.response.to.have.status(204);\r",
-									"});"
+									"});\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -217,22 +246,36 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url_global}}/api/users/123",
+							"raw": "{{url_global}}/api/users?page={{userId_qa_env}}",
 							"host": [
 								"{{url_global}}"
 							],
 							"path": [
 								"api",
-								"users",
-								"123"
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{userId_qa_env}}"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "dev environment variable",
 					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
 						{
 							"listen": "test",
 							"script": {
@@ -249,7 +292,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url_dev_env}}/api/users?page=2",
+							"raw": "{{url_dev_env}}/api/users?page={{userId_collection}}",
 							"host": [
 								"{{url_dev_env}}"
 							],
@@ -260,7 +303,102 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "2"
+									"value": "{{userId_collection}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "variables in scripts",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//we can define variables(local variable) in request level just in the pre-request Script field\r",
+									"//local variable\r",
+									"pm.variables.set(\"url_local\",\"https://reqres.in/api\");\r",
+									"//{{url_local}}/users?page=1\r",
+									"\r",
+									"//global variable through prerequest script\r",
+									"pm.globals.set(\"userId_global\",\"2\");\r",
+									"\r",
+									"//environment variable\r",
+									"pm.environment.set(\"userId_qa_env\",\"2\");\r",
+									"\r",
+									"//collection variable\r",
+									"pm.collectionVariables.set(\"userId_collect\",\"2\");\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//capture the values from variables\r",
+									"//to print variables on the console\r",
+									"console.log(pm.variables.get(\"url_local\"));\r",
+									"console.log(pm.globals.get(\"userId_global\"));\r",
+									"console.log(pm.environment.get(\"userId_qa_env\"));\r",
+									"console.log(pm.collectionVariables.get(\"userId_collect\"));\r",
+									"\r",
+									"//to delete a variable ==> we type our codes in test script,\r",
+									"//because prerequest part executes first, then test scripts executes\r",
+									"//we use unset() method\r",
+									"\r",
+									" //local variable\r",
+									"  pm.variables.unset(\"url_local\",\"https://reqres.in/api\");\r",
+									" //{{url_local}}/users?page=1\r",
+									"\r",
+									"//global variable through prerequest script\r",
+									" pm.globals.unset(\"userId_global\",\"2\");\r",
+									"\r",
+									" //environment variable\r",
+									" pm.environment.unset(\"userId_qa_env\",\"2\");\r",
+									"\r",
+									" //collection variable\r",
+									" pm.collectionVariables.unset(\"userId_collection\",\"2\");\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_local}}/users?page={{userId_global}}",
+							"host": [
+								"{{url_local}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "{{userId_global}}"
 								}
 							]
 						}
@@ -310,6 +448,12 @@
 					"console.log(\"test script at collection level\");"
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userId_collect",
+			"value": ""
 		}
 	]
 }

@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userId\": 21,\r\n    \"title\": \"Wash the dishes\",\r\n    \"completed\": false\r\n}",
+					"raw": " {\r\n       \"userId\": 55,\r\n       \"title\": \"go to learn API\",\r\n       \"completed\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -269,6 +269,27 @@
 					"path": [
 						"todos",
 						"198"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://jsonplaceholder.typicode.com/todos/12",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://jsonplaceholder.typicode.com/todos/12",
+					"protocol": "https",
+					"host": [
+						"jsonplaceholder",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"todos",
+						"12"
 					]
 				}
 			},
