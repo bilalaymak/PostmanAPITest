@@ -186,6 +186,15 @@ const jsonData = {
 
 
 
+//to create automatically id
+var jsonData = JSON.parse(responseBody);
+pm.environment.set("id",jsonData.id);
+
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(201);
+});
+
 
 
 
