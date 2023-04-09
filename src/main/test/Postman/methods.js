@@ -195,6 +195,26 @@ pm.test("Status code is 200", function () {
     pm.response.to.have.status(201);
 });
 
+//////////////////////////////////
+//authentication token: f3f0c71d46242de6c0108db4b6c6ca88aac30b32334eaca6f9da78c9db88d321
+
+//creating random string(email)
+var random = Math.random().toString(36).substring(2);
+var userEmail = "bilal" + random + "@gmail.com";
+var userName = "bilal" + random;
+
+pm.environment.set("email_env",userEmail);
+pm.environment.set("name_env",userName);
+
+{
+   "name": {{name_env}},
+   "gender":"male",
+   "email":{{email_env}}, //we should generate email address authomatically and randomly, because it must be unique(like id)
+   "status":"active"
+}
+
+
+
 
 
 
