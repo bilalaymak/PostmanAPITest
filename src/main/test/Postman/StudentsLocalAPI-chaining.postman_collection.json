@@ -72,15 +72,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/students/{{id}}",
+					"raw": "http://localhost:3000/students",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"students",
-						"{{id}}"
+						"students"
 					]
 				}
 			},
