@@ -110,7 +110,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"name\": \"Bilal\",\r\n        \"email\": \"adiasd@raynor.org\",\r\n        \"gender\": \"male\",\r\n        \"status\": \"active\"\r\n}\r\n    ",
+					"raw": "{\r\n        \"name\": \"Bilal\",\r\n        \"email\": \"adiasdasdasd@raynor.org\",\r\n        \"gender\": \"male\",\r\n        \"status\": \"active\"\r\n}\r\n    ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -151,7 +151,13 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					""
+					"//creating random string(email)",
+					"var random = Math.random().toString(36).substring(2);",
+					"var userEmail = \"bilal\" + random + \"@gmail.com\";",
+					"var userName = \"bilal\" + random;",
+					"",
+					"pm.collectionVariables.set(\"email_collection\",userEmail);",
+					"pm.collectionVariables.set(\"name_collection\",userName);"
 				]
 			}
 		},
@@ -163,6 +169,16 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "email_collection",
+			"value": ""
+		},
+		{
+			"key": "name_collection",
+			"value": ""
 		}
 	]
 }
