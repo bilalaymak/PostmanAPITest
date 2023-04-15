@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "a92dc5e0-d3de-4772-87bf-2ae04d793461",
+		"name": "GMIBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26356720"
+	},
+	"item": [
+		{
+			"name": "https://www.gmibank.com/api/tp-customers/110452",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.gmibank.com/api/tp-customers/110452",
+					"protocol": "https",
+					"host": [
+						"www",
+						"gmibank",
+						"com"
+					],
+					"path": [
+						"api",
+						"tp-customers",
+						"110452"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"Mark.123\",\r\n  \"rememberMe\": true,\r\n  \"username\": \"mark_twain\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://www.gmibank.com/api/authenticate",
+					"protocol": "https",
+					"host": [
+						"www",
+						"gmibank",
+						"com"
+					],
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n          \"name\": \"My country\",\r\n          \"states\": [\r\n            {\r\n              \"id\": 0,\r\n              \"name\": \"My State\"\r\n            },\r\n            {\r\n              \"id\": 1,\r\n              \"name\": \"Your State\"\r\n            },\r\n            {\r\n              \"id\": 2,\r\n              \"name\": \"Her State\"\r\n            }\r\n          ]\r\n         }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gmibank.com/api/tp-countries",
+					"protocol": "https",
+					"host": [
+						"gmibank",
+						"com"
+					],
+					"path": [
+						"api",
+						"tp-countries"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "Mark.123",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "mark_twain",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
